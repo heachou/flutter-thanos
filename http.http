@@ -1,0 +1,8 @@
+@url="https://test.api.merika.com/claude"
+
+POST {{url}}/auth/login HTTP/1.1
+content-type: application/json
+loginChannel: 1
+s-version: 1.9.3
+
+{"authType":"PHONE_NUMBER_SMS_CODE","handPhone":"15196947186","authCode":192019,"loginChannel":1}
