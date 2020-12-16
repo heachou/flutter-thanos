@@ -16,8 +16,10 @@ class AppColors {
   /// dangerText #E62E4D
   static const Color dangerText = Color.fromRGBO(230, 46, 77, 1);
 
-  /// icon 颜色
+  /// icon 菜单颜色
   static const Color primaryIconText = Color.fromRGBO(51, 46, 47, 1);
 
-  /// 按钮带背景的
+  /// 页面背景色 #F2F2F2
+  static const Color pageBgColor = Color.fromRGBO(242, 242, 242, 1);
+  
 }

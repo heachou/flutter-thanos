@@ -4,17 +4,29 @@ import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/colors.dart';
 
 List<Widget> menus = [
+  SizedBox(
+    height: 16,
+  ),
   listTile(
     title: '工作量',
     iconData: Iconfont.icongongzuoliang,
+  ),
+  SizedBox(
+    height: 2,
   ),
   listTile(
     title: '人才管理',
     iconData: Iconfont.iconrencaiguanli,
   ),
+  SizedBox(
+    height: 2,
+  ),
   listTile(
     title: '企业管理',
     iconData: Iconfont.iconqiyeguanli,
+  ),
+  SizedBox(
+    height: 2,
   ),
   listTile(
     title: '切换角色',
@@ -27,7 +39,7 @@ Widget listTile({IconData iconData, String title}) {
     leading: Icon(
       iconData,
       color: AppColors.primaryIconText,
-      size: duSetWidth(32),
+      // size: duSetWidth(32),
     ),
     title: Text(
       title,

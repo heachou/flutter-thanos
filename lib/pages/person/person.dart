@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:thanos/pages/person/pool.dart';
+import 'package:thanos/pages/person/repository.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/widgets/widgets.dart';
 
@@ -48,11 +50,10 @@ class _PersonPageState extends State<PersonPage> {
       drawer: userDrawer(),
       body: TabBarView(
         controller: _controller,
-        children: _tabValues.map((f) {
-          return Center(
-            child: Text(f),
-          );
-        }).toList(),
+        children: [
+          PoolPage(),
+          RePositoryPage(),
+        ],
       ),
     );
   }
