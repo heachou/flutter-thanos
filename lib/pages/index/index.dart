@@ -27,7 +27,11 @@ class _IndexPageState extends State<IndexPage> {
           RaisedButton(
             onPressed: toSignIn,
             child: Text('to signin'),
-          )
+          ),
+          RaisedButton(
+            onPressed: toPerson,
+            child: Text('to person'),
+          ),
         ],
       ),
     );
@@ -35,5 +39,9 @@ class _IndexPageState extends State<IndexPage> {
 
   void toSignIn() {
     Application.router.navigateTo(context, '/signIn');
+  }
+
+  void toPerson() {
+    Application.router.navigateTo(context, '/person');
   }
 }

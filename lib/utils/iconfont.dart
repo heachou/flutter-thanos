@@ -5,8 +5,10 @@ class Iconfont {
   // iconName: logo
   static const IconData iconzhongtai_logo =
       IconData(0xe6e2, fontFamily: _family);
+
   static const IconData icongongzuoliang =
       IconData(0xe6d4, fontFamily: _family);
+      
   static const IconData iconqiyeguanli = IconData(0xe6d5, fontFamily: _family);
   static const IconData icondingding = IconData(0xe6d6, fontFamily: _family);
   static const IconData iconrencaiguanli =
