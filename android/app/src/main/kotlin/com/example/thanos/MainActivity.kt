@@ -1,4 +1,4 @@
-package com.example.thanos
+package com.zhulie.thanos
 
 import io.flutter.embedding.android.FlutterActivity
 
