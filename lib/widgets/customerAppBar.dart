@@ -31,6 +31,7 @@ Widget customerAppBar({
       controller: controller,
       labelColor: AppColors.primaryColor,
       unselectedLabelColor: AppColors.primaryText,
+      indicatorPadding: EdgeInsets.all(0),
       indicator: BoxDecoration(),
     ),
     elevation: 0,

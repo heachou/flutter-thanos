@@ -60,5 +60,6 @@ class _PersonPageState extends State<PersonPage> {
 
   void toSearch() {
     print('to Search');
+    print(_controller.index);
   }
 }

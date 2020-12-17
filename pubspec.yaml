@@ -41,6 +41,8 @@ dependencies:
   flutter_swiper: ^1.1.6
   # 路由
   fluro: ^1.7.8
+  # 下拉刷新  上拉加载
+  flutter_easyrefresh: ^2.1.7
 
 dev_dependencies:
   flutter_test:

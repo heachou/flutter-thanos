@@ -268,3 +268,37 @@ class MenuList {
         "show": show,
       };
 }
+
+class UserRequestLogin {
+  UserRequestLogin({
+    this.authType,
+    this.handPhone,
+    this.authCode,
+    this.loginChannel,
+  });
+
+  String authType;
+  String handPhone;
+  int authCode;
+  int loginChannel;
+
+  factory UserRequestLogin.fromRawJson(String str) =>
+      UserRequestLogin.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory UserRequestLogin.fromJson(Map<String, dynamic> json) =>
+      UserRequestLogin(
+        authType: json["authType"],
+        handPhone: json["handPhone"],
+        authCode: json["authCode"],
+        loginChannel: json["loginChannel"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "authType": authType,
+        "handPhone": handPhone,
+        "authCode": authCode,
+        "loginChannel": loginChannel,
+      };
+}

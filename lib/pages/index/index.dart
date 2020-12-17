@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thanos/entitys/user.dart';
+import 'package:thanos/apis/apis.dart';
 import 'package:thanos/router/application.dart';
 
 class IndexPage extends StatefulWidget {
@@ -32,9 +34,30 @@ class _IndexPageState extends State<IndexPage> {
             onPressed: toPerson,
             child: Text('to person'),
           ),
+          RaisedButton(
+            onPressed: toDemo,
+            child: Text('to demo'),
+          ),
+          RaisedButton(
+            onPressed: login,
+            child: Text('login'),
+          )
         ],
       ),
     );
+  }
+
+  void login() async {
+    // UserRequestLogin params = UserRequestLogin(
+    //   authType: "PHONE_NUMBER_SMS_CODE",
+    //   handPhone: "15196947186",
+    //   authCode: 192019,
+    //   loginChannel: 1,
+    // );
+
+    UserResponseLogin res = await UserApi.login(context: context);
+
+    print(res.code);
   }
 
   void toSignIn() {
@@ -43,5 +66,9 @@ class _IndexPageState extends State<IndexPage> {
 
   void toPerson() {
     Application.router.navigateTo(context, '/person');
+  }
+
+  void toDemo() {
+    Application.router.navigateTo(context, '/demo');
   }
 }

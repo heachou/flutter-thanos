@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:thanos/pages/index/index.dart';
 import 'package:thanos/pages/notFound/notFound.dart';
 import 'package:thanos/pages/person/person.dart';
+import 'package:thanos/pages/demos/demos.dart';
 import 'package:thanos/pages/sign_in/sign_in.dart';
 
 /// 首页
@@ -22,6 +23,12 @@ var personHandler = Handler(
 var signInHandler = Handler(
   handlerFunc: (context, parameters) {
     return SignInPage();
+  },
+);
+
+var demoHandler = Handler(
+  handlerFunc: (context, parameters) {
+    return DemoPage();
   },
 );
 

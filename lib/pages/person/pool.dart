@@ -3,6 +3,8 @@ import 'package:thanos/utils/screen.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/colors.dart';
 import 'package:thanos/widgets/widgets.dart';
+import 'package:thanos/pages/person/widget/widget.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class PoolPage extends StatefulWidget {
   PoolPage({Key key}) : super(key: key);
@@ -11,20 +13,72 @@ class PoolPage extends StatefulWidget {
   _PoolPageState createState() => _PoolPageState();
 }
 
-class _PoolPageState extends State<PoolPage> {
+class _PoolPageState extends State<PoolPage>
+    with AutomaticKeepAliveClientMixin {
+  EasyRefreshController _controller;
+
+  int _count = 20;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = EasyRefreshController();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: AppColors.pageBgColor,
       body: Column(
         children: [
-          Text('heelo'),
+          Container(
+            margin: EdgeInsets.fromLTRB(
+              duSetWidth(36),
+              duSetWidth(30),
+              duSetWidth(36),
+              duSetHeight(20),
+            ),
+            child: personTips(todayUpdate: 101, total: 1811, coins: 1830),
+          ),
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return item(index);
+            child: EasyRefresh.custom(
+              enableControlFinishRefresh: false,
+              enableControlFinishLoad: true,
+              controller: _controller,
+              onRefresh: () async {
+                await Future.delayed(Duration(seconds: 2), () {
+                  print('onRefresh');
+                  setState(() {
+                    _count = 20;
+                  });
+                  _controller.resetLoadState();
+                });
               },
-              itemCount: 200,
+              onLoad: () async {
+                await Future.delayed(Duration(seconds: 2), () {
+                  print('onLoad');
+                  setState(() {
+                    _count += 10;
+                  });
+                  _controller.finishLoad(noMore: _count >= 100);
+                });
+              },
+              header: MaterialHeader(),
+              footer: MaterialFooter(),
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return item(index);
+                    },
+                    childCount: _count,
+                  ),
+                ),
+              ],
             ),
           )
         ],
@@ -34,6 +88,10 @@ class _PoolPageState extends State<PoolPage> {
 }
 
 Widget item(int index) {
+  TextStyle grayTextStyle = TextStyle(
+    color: AppColors.labelGrayText,
+    fontSize: duSetFontSize(24),
+  );
   return Container(
     margin: EdgeInsets.fromLTRB(
       duSetWidth(30),
@@ -62,7 +120,7 @@ Widget item(int index) {
             Container(
               margin: EdgeInsets.only(right: duSetWidth(10)),
               child: Text(
-                '张三',
+                '张三$index',
                 style: TextStyle(
                     color: AppColors.secondaryText,
                     fontSize: duSetFontSize(36)),
@@ -97,7 +155,48 @@ Widget item(int index) {
         SizedBox(
           height: duSetHeight(20),
         ),
-        Text('一万元以下 丨 男 丨 四川·成都 丨以下四川·成都 丨以下四川·成都 丨以下 '),
+        Text(
+          '一万元以下 丨 男 丨 四川·成都 丨以下四川·成都 丨以下四川·成都 丨以下 ',
+          style: TextStyle(
+            color: AppColors.primaryText,
+            fontSize: duSetFontSize(32),
+          ),
+        ),
+        SizedBox(
+          height: duSetHeight(20),
+        ),
+        Text(
+          '跟进内容跟进内容，这是跟进内容跟进内容。',
+          style: TextStyle(
+            color: AppColors.labelGrayText,
+            fontSize: duSetFontSize(24),
+          ),
+        ),
+        SizedBox(
+          height: duSetHeight(22),
+        ),
+        Container(
+          child: Row(
+            children: [
+              Text(
+                '更新时间：2018/02/14 13:3',
+                style: grayTextStyle,
+              ),
+              Spacer(),
+              Text(
+                '拨打：23',
+                style: grayTextStyle,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: duSetWidth(20)),
+                child: Text(
+                  '领取：15',
+                  style: grayTextStyle,
+                ),
+              )
+            ],
+          ),
+        )
       ],
     ),
   );
