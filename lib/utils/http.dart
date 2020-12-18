@@ -19,7 +19,10 @@ class HttpUtil {
       // 响应流上前后两次接受到数据的间隔，单位为毫秒。
       receiveTimeout: 5000,
       // Http请求头.
-      headers: {},
+      headers: {
+        's-version': '1.9.3',
+        'loginChannel': '1',
+      },
 
       /// 请求的Content-Type，默认值是"application/json; charset=utf-8".
       /// 如果您想以"application/x-www-form-urlencoded"格式编码请求数据,
@@ -51,7 +54,6 @@ class HttpUtil {
       // 错误交互处理
       var context = e.request.extra["context"];
       if (context != null) {
-        print(eInfo.code);
         // switch (eInfo.code) {
         //   case 401: // 没有权限 重新登录
         //     break;
@@ -93,7 +95,6 @@ class HttpUtil {
           try {
             int errCode = error.response.statusCode;
             // String errMsg = error.response.statusMessage;
-            // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
               case 400:
                 {

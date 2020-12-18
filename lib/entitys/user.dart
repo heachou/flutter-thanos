@@ -13,7 +13,7 @@ class UserResponseLogin {
 
   int code;
   String message;
-  Data data;
+  UserData data;
 
   factory UserResponseLogin.fromRawJson(String str) =>
       UserResponseLogin.fromJson(json.decode(str));
@@ -24,7 +24,7 @@ class UserResponseLogin {
       UserResponseLogin(
         code: json["code"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: UserData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,8 +34,8 @@ class UserResponseLogin {
       };
 }
 
-class Data {
-  Data({
+class UserData {
+  UserData({
     this.loginResult,
     this.token,
     this.tel,
@@ -99,11 +99,12 @@ class Data {
   int loginChannel;
   String realIp;
 
-  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
+  factory UserData.fromRawJson(String str) =>
+      UserData.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         loginResult: json["loginResult"],
         token: json["token"],
         tel: json["tel"],

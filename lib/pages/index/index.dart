@@ -48,14 +48,15 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   void login() async {
-    // UserRequestLogin params = UserRequestLogin(
-    //   authType: "PHONE_NUMBER_SMS_CODE",
-    //   handPhone: "15196947186",
-    //   authCode: 192019,
-    //   loginChannel: 1,
-    // );
+    UserRequestLogin params = UserRequestLogin(
+      authType: "PHONE_NUMBER_SMS_CODE",
+      handPhone: "15196947186",
+      authCode: 192019,
+      loginChannel: 1,
+    );
 
-    UserResponseLogin res = await UserApi.login(context: context);
+    UserResponseLogin res =
+        await UserApi.login(context: context, params: params);
 
     print(res.code);
   }

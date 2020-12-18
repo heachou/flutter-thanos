@@ -4,7 +4,7 @@ import 'package:thanos/utils/utils.dart';
 
 Future<bool> toastInfo({
   @required String msg,
-  Color backgroundColor = Colors.black,
+  Color backgroundColor = Colors.black26,
   Color textColor = Colors.white,
 }) async {
   return await Fluttertoast.showToast(
@@ -13,6 +13,6 @@ Future<bool> toastInfo({
     gravity: ToastGravity.BOTTOM,
     backgroundColor: backgroundColor,
     textColor: textColor,
-    fontSize: duSetFontSize(16),
+    fontSize: duSetFontSize(32),
   );
 }

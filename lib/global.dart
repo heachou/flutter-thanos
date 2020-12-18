@@ -6,8 +6,8 @@ import 'package:thanos/values/storage.dart';
 
 class Global {
   /// 用户配置
-  static UserResponseLogin profile = UserResponseLogin(
-    data: null,
+  static UserData profile = UserData(
+    token: null,
   );
 
   /// 是否第一次打开
@@ -36,13 +36,14 @@ class Global {
 
     // 读取离线用户信息
     var _profileJSON = StorageUtil().getJSON(STORAGE_USER_PROFILE_KEY);
+
     if (_profileJSON != null) {
-      profile = UserResponseLogin.fromJson(_profileJSON);
+      profile = UserData.fromJson(_profileJSON);
       isOfflineLogin = true;
     }
   }
 
-  static Future<bool> saveProfile(UserResponseLogin userResponse) {
+  static Future<bool> saveProfile(UserData userResponse) {
     return StorageUtil()
         .setJSON(STORAGE_USER_PROFILE_KEY, userResponse.toJson());
   }

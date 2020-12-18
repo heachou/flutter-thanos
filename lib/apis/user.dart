@@ -5,12 +5,12 @@ import 'package:thanos/utils/utils.dart';
 class UserApi {
   static Future<UserResponseLogin> login({
     @required BuildContext context,
-    // UserRequestLogin params,
+    UserRequestLogin params,
   }) async {
     var response = await HttpUtil().post(
       '/auth/login',
       context: context,
-      // params: params,
+      params: params,
     );
     print(response);
     return UserResponseLogin.fromJson(response);
