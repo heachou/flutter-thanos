@@ -1,6 +1,8 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thanos/global.dart';
+import 'package:thanos/provider/provider.dart';
 import 'package:thanos/router/application.dart';
 import 'package:thanos/router/routes.dart';
 import 'package:thanos/values/colors.dart';
@@ -9,7 +11,14 @@ void main() {
   final router = FluroRouter();
   Routes.configureRoutes(router);
   Application.router = router;
-  Global.init().then((value) => runApp(MyApp()));
+  Global.init().then((value) => runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => UserInfo()),
+          ],
+          child: MyApp(),
+        ),
+      ));
 }
 
 class MyApp extends StatefulWidget {

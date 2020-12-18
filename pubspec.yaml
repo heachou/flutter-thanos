@@ -43,6 +43,8 @@ dependencies:
   fluro: ^1.7.8
   # 下拉刷新  上拉加载
   flutter_easyrefresh: ^2.1.7
+  # 状态管理
+  provider: ^4.3.2+3
 
 dev_dependencies:
   flutter_test:

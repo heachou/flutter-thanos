@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thanos/entitys/entitys.dart';
 import 'package:thanos/global.dart';
+import 'package:thanos/provider/provider.dart';
 import 'package:thanos/router/application.dart';
 import 'package:thanos/utils/screen.dart';
 import 'package:thanos/utils/utils.dart';
@@ -43,6 +45,9 @@ class _TelLoginState extends State<TelLogin> {
     UserResponseLogin res =
         await UserApi.login(context: context, params: params);
     Global.saveProfile(res.data);
+
+    UserInfo userInfo = Provider.of<UserInfo>(context, listen: false);
+    userInfo.setUserInfo(res.data);
     Application.router.navigateTo(context, '/person', clearStack: true);
   }
 

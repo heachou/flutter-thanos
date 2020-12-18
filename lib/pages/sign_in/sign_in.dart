@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thanos/global.dart';
-import './dd_login.dart';
-import './telLogin.dart';
+import 'package:thanos/pages/sign_in/dd_login.dart';
+import 'package:thanos/pages/sign_in/tel_login.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key key}) : super(key: key);
