@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:thanos/entitys/entitys.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/storage.dart';
@@ -40,6 +41,13 @@ class Global {
     if (_profileJSON != null) {
       profile = UserData.fromJson(_profileJSON);
       isOfflineLogin = true;
+    }
+
+    // android 状态栏为透明的沉浸
+    if (Platform.isAndroid) {
+      SystemUiOverlayStyle systemUiOverlayStyle =
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
   }
 

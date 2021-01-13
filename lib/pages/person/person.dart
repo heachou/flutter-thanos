@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:thanos/pages/person/pool.dart';
 import 'package:thanos/pages/person/repository.dart';
-import 'package:thanos/provider/provider.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/widgets/widgets.dart';
 
@@ -29,14 +27,11 @@ class _PersonPageState extends State<PersonPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserInfo userInfo = Provider.of<UserInfo>(context, listen: false);
-    print(userInfo);
     return Scaffold(
       key: _scaffoldKey,
       appBar: customerAppBar(
-        avatar: userInfo != null
-            ? userInfo.photoPath
-            : "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250",
+        avatar:
+            "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250",
         controller: _controller,
         onLeadingPress: () {
           _scaffoldKey.currentState.openDrawer();
@@ -64,7 +59,6 @@ class _PersonPageState extends State<PersonPage> {
   }
 
   void toSearch() {
-    print('to Search');
     print(_controller.index);
   }
 }

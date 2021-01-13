@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanos/entitys/user.dart';
 import 'package:thanos/apis/apis.dart';
-import 'package:thanos/router/application.dart';
 
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
@@ -61,15 +60,9 @@ class _IndexPageState extends State<IndexPage> {
     print(res.code);
   }
 
-  void toSignIn() {
-    Application.router.navigateTo(context, '/signIn');
-  }
+  void toSignIn() {}
 
-  void toPerson() {
-    Application.router.navigateTo(context, '/person');
-  }
+  void toPerson() {}
 
-  void toDemo() {
-    Application.router.navigateTo(context, '/demo');
-  }
+  void toDemo() {}
 }

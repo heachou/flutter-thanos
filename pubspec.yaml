@@ -29,7 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   # toast
-  fluttertoast: ^7.1.4
+  fluttertoast: ^7.1.6
   # 屏幕适配
   flutter_screenutil: ^3.2.0
   # http
@@ -39,12 +39,14 @@ dependencies:
   cached_network_image: ^2.3.3
   # 轮播图
   flutter_swiper: ^1.1.6
-  # 路由
-  fluro: ^1.7.8
   # 下拉刷新  上拉加载
   flutter_easyrefresh: ^2.1.7
-  # 状态管理
-  provider: ^4.3.2+3
+  # 状态管理 路由
+  get: ^3.24.0
+  # Dart 常用工具类库 https://github.com/Sky24n/common_utils
+  common_utils: 1.2.1
+  # 格式化String https://github.com/Naddiseo/dart-sprintf
+  sprintf: ^5.0.0
 
 dev_dependencies:
   flutter_test:
