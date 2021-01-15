@@ -5,6 +5,16 @@ import 'package:sprintf/sprintf.dart';
 import 'package:thanos/net/error_handle.dart';
 import 'package:thanos/utils/log_utils.dart';
 
+class AuthInterceptor extends Interceptor {
+  @override
+  Future onRequest(RequestOptions options) {
+    // https://developer.github.com/v3/#user-agent-required
+    options.headers['loginChannel'] = 1;
+    options.headers['s-version'] = '1.9.3';
+    return super.onRequest(options);
+  }
+}
+
 class LoggingInterceptor extends Interceptor {
   DateTime _startTime;
   DateTime _endTime;
@@ -86,7 +96,8 @@ class AdapterInterceptor extends Interceptor {
       if (content.isEmpty) {
         content = _kDefaultText;
       }
-      result = sprintf(_kSuccessFormat, [content]);
+      // result = sprintf(_kSuccessFormat, [content]);
+      result = content;
       response.statusCode = ExceptionHandle.success;
     } else {
       if (response.statusCode == ExceptionHandle.not_found) {
@@ -121,7 +132,7 @@ class AdapterInterceptor extends Interceptor {
               response.statusCode = ExceptionHandle.success;
             }
           } catch (e) {
-//            Log.d('异常信息：$e');
+            Log.d('异常信息：$e');
             // 解析异常直接按照返回原数据处理（一般为返回500,503 HTML页面代码）
             result = sprintf(_kFailureFormat,
                 [response.statusCode, '服务器异常(${response.statusCode})']);

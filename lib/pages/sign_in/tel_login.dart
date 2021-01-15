@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:thanos/entitys/entitys.dart';
-import 'package:thanos/global.dart';
 import 'package:thanos/utils/screen.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/colors.dart';
 import 'package:thanos/widgets/widgets.dart';
-import 'package:thanos/apis/apis.dart';
 
 class TelLogin extends StatefulWidget {
   TelLogin({Key key}) : super(key: key);
@@ -39,9 +37,9 @@ class _TelLoginState extends State<TelLogin> {
       loginChannel: 1,
     );
 
-    UserResponseLogin res =
-        await UserApi.login(context: context, params: params);
-    Global.saveProfile(res.data);
+    // UserResponseLogin res =
+    //     await UserApi.login(context: context, params: params);
+    // Global.saveProfile(res.data);
   }
 
   // 表单登录

@@ -1,36 +1,54 @@
-import 'package:thanos/values/values.dart';
+import 'package:thanos/entitys/entitys.dart';
 
-class BaseEntity<T> {
-  BaseEntity(this.code, this.message, this.data);
-
-  BaseEntity.fromJson(Map<String, dynamic> json) {
-    code = json[Constant.code] as int;
-    message = json[Constant.message] as String;
-    if (json.containsKey(Constant.data)) {
-      data = _generateOBJ<T>(json[Constant.data]);
+class EntityFactory {
+  static T generateOBJ<T>(json) {
+    if (json == null) {
+      return null;
+    } else if (T.toString() == "UserResponseLogin") {
+      return UserResponseLogin.fromJson(json) as T;
+    } else {
+      return json as T;
     }
   }
+}
 
+class BaseEntity<T> {
   int code;
   String message;
   T data;
 
-  T _generateOBJ<T>(Object json) {
-    if (T.toString() == 'String') {
-      return json.toString() as T;
-    } else if (T.toString() == 'Map<dynamic, dynamic>') {
-      return json as T;
-    }
-    return _generateList(json);
-  }
+  BaseEntity({this.code, this.message, this.data});
 
-  _generateList<T>(List json) {
-    List<T> mData = new List<T>();
-    if (json != null) {
-      json.forEach((v) {
-        mData.add(_generateOBJ<T>(v));
+  factory BaseEntity.fromJson(json) {
+    return BaseEntity(
+      code: json["code"],
+      message: json["message"],
+      // data值需要经过工厂转换为我们传进来的类型
+      data: EntityFactory.generateOBJ<T>(json["data"]),
+    );
+  }
+}
+
+class BaseListEntity<T> {
+  int code;
+  String message;
+  List<T> data;
+
+  BaseListEntity({this.code, this.message, this.data});
+
+  factory BaseListEntity.fromJson(json) {
+    List<T> mData = List();
+    if (json['data'] != null) {
+      //遍历data并转换为我们传进来的类型
+      (json['data'] as List).forEach((v) {
+        mData.add(EntityFactory.generateOBJ<T>(v));
       });
     }
-    return mData;
+
+    return BaseListEntity(
+      code: json["code"],
+      message: json["message"],
+      data: mData,
+    );
   }
 }

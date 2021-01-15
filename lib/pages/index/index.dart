@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanos/entitys/user.dart';
-import 'package:thanos/apis/apis.dart';
 
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
@@ -53,11 +52,6 @@ class _IndexPageState extends State<IndexPage> {
       authCode: 192019,
       loginChannel: 1,
     );
-
-    UserResponseLogin res =
-        await UserApi.login(context: context, params: params);
-
-    print(res.code);
   }
 
   void toSignIn() {}

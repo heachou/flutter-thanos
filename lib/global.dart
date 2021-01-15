@@ -7,7 +7,7 @@ import 'package:thanos/values/storage.dart';
 
 class Global {
   /// 用户配置
-  static UserData profile = UserData(
+  static UserResponseLogin profile = UserResponseLogin(
     token: null,
   );
 
@@ -39,7 +39,7 @@ class Global {
     var _profileJSON = StorageUtil().getJSON(STORAGE_USER_PROFILE_KEY);
 
     if (_profileJSON != null) {
-      profile = UserData.fromJson(_profileJSON);
+      profile = UserResponseLogin.fromJson(_profileJSON);
       isOfflineLogin = true;
     }
 
@@ -51,7 +51,7 @@ class Global {
     }
   }
 
-  static Future<bool> saveProfile(UserData userResponse) {
+  static Future<bool> saveProfile(UserResponseLogin userResponse) {
     return StorageUtil()
         .setJSON(STORAGE_USER_PROFILE_KEY, userResponse.toJson());
   }

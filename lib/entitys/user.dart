@@ -1,41 +1,11 @@
 // To parse this JSON data, do
 //
-//     final userResponseLogin = userResponseLoginFromJson(jsonString);
+//     final userResponseLogin2 = userResponseLogin2FromJson(jsonString);
 
 import 'dart:convert';
 
 class UserResponseLogin {
   UserResponseLogin({
-    this.code,
-    this.message,
-    this.data,
-  });
-
-  int code;
-  String message;
-  UserData data;
-
-  factory UserResponseLogin.fromRawJson(String str) =>
-      UserResponseLogin.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory UserResponseLogin.fromJson(Map<String, dynamic> json) =>
-      UserResponseLogin(
-        code: json["code"],
-        message: json["message"],
-        data: UserData.fromJson(json["data"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "code": code,
-        "message": message,
-        "data": data.toJson(),
-      };
-}
-
-class UserData {
-  UserData({
     this.loginResult,
     this.token,
     this.tel,
@@ -99,12 +69,13 @@ class UserData {
   int loginChannel;
   String realIp;
 
-  factory UserData.fromRawJson(String str) =>
-      UserData.fromJson(json.decode(str));
+  factory UserResponseLogin.fromRawJson(String str) =>
+      UserResponseLogin.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+  factory UserResponseLogin.fromJson(Map<String, dynamic> json) =>
+      UserResponseLogin(
         loginResult: json["loginResult"],
         token: json["token"],
         tel: json["tel"],

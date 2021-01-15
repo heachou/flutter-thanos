@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:thanos/utils/log_utils.dart';
@@ -30,7 +32,6 @@ void configDio({
 }
 
 typedef NetSuccessCallback<T> = Function(T data);
-typedef NetSuccessListCallback<T> = Function(List<T> data);
 typedef NetErrorCallback = Function(int code, String msg);
 
 /// @weilu https://github.com/simplezhli
@@ -55,15 +56,15 @@ class DioUtils {
     _dio = Dio(_options);
 
     /// Fiddler抓包代理配置 https://www.jianshu.com/p/d831b1f7c45b
-//    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-//        (HttpClient client) {
-//      client.findProxy = (uri) {
-//        //proxy all request to localhost:8888
-//        return 'PROXY 10.41.0.132:8888';
-//      };
-//      client.badCertificateCallback =
-//          (X509Certificate cert, String host, int port) => true;
-//    };
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      // client.findProxy = (uri) {
+      //   //proxy all request to localhost:8888
+      //   return 'PROXY 192.168.10.144:8888';
+      // };
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    };
 
     /// 添加拦截器
     _interceptors.forEach((interceptor) {
@@ -96,7 +97,7 @@ class DioUtils {
       cancelToken: cancelToken,
     );
     try {
-      final String data = response.data.toString();
+      final data = response.data;
 
       /// 集成测试无法使用 isolate https://github.com/flutter/flutter/issues/24703
       /// 使用compute条件：数据大于10KB（粗略使用10 * 1024）且当前不是集成测试（后面可能会根据Web环境进行调整）
@@ -106,9 +107,11 @@ class DioUtils {
       final Map<String, dynamic> _map =
           isCompute ? await compute(parseData, data) : parseData(data);
       return BaseEntity<T>.fromJson(_map);
+      // return BaseEntity<T>.fromJson(_map);
     } catch (e) {
       debugPrint(e.toString());
-      return BaseEntity<T>(ExceptionHandle.parse_error, '数据解析错误！', null);
+      return BaseEntity<T>(
+          code: ExceptionHandle.parse_error, message: '数据解析错误！', data: null);
     }
   }
 
@@ -136,7 +139,7 @@ class DioUtils {
       options: options,
       cancelToken: cancelToken,
     ).then<void>((BaseEntity<T> result) {
-      if (result.code == 0) {
+      if (result.code == 200) {
         if (onSuccess != null) {
           onSuccess(result.data);
         }
@@ -145,6 +148,7 @@ class DioUtils {
       }
     }, onError: (dynamic e) {
       _cancelLogPrint(e, url);
+      print(e);
       final NetError error = ExceptionHandle.handleException(e);
       _onError(error.code, error.msg, onError);
     });
