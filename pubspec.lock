@@ -153,6 +153,13 @@ packages:
       url: "https://pub.flutter-io.cn/"
     source: hosted
     version: "3.2.0"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      url: "https://pub.flutter-io.cn/"
+    source: hosted
+    version: "0.5.7"
   flutter_swiper:
     dependency: "direct main"
     description:
@@ -311,7 +318,7 @@ packages:
     source: hosted
     version: "0.24.1"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       url: "https://pub.flutter-io.cn/"
@@ -364,6 +371,13 @@ packages:
       url: "https://pub.flutter-io.cn/"
     source: hosted
     version: "1.8.0-nullsafety.2"
+  sp_util:
+    dependency: "direct main"
+    description:
+      name: sp_util
+      url: "https://pub.flutter-io.cn/"
+    source: hosted
+    version: "1.0.1"
   sprintf:
     dependency: "direct main"
     description:

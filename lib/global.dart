@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:thanos/entitys/entitys.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/storage.dart';
@@ -28,18 +29,19 @@ class Global {
     // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
     // 工具初始
-    await StorageUtil.init();
+    await SpUtil.getInstance();
     // 设备第一次打开
-    isFirstOpen = !StorageUtil().getBool(STORAGE_DEVICE_ALREADY_OPEN_KEY);
+    isFirstOpen =
+        !SpUtil.getBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, defValue: true);
     if (isFirstOpen) {
-      StorageUtil().setBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, true);
+      SpUtil.putBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, false);
     }
 
     // 读取离线用户信息
-    var _profileJSON = StorageUtil().getJSON(STORAGE_USER_PROFILE_KEY);
+    var profile = SpUtil.getObj(
+        STORAGE_USER_PROFILE_KEY, (v) => UserRequestLogin.fromJson(v));
 
-    if (_profileJSON != null) {
-      profile = UserResponseLogin.fromJson(_profileJSON);
+    if (profile != null) {
       isOfflineLogin = true;
     }
 
@@ -52,7 +54,6 @@ class Global {
   }
 
   static Future<bool> saveProfile(UserResponseLogin userResponse) {
-    return StorageUtil()
-        .setJSON(STORAGE_USER_PROFILE_KEY, userResponse.toJson());
+    return SpUtil.putObject(STORAGE_USER_PROFILE_KEY, userResponse);
   }
 }
