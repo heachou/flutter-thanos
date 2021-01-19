@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 import 'package:sp_util/sp_util.dart';
+import 'package:thanos/global.dart';
 import 'package:thanos/routes/app_pages.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/values.dart';
@@ -33,6 +34,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _goLogin() {
+    Global.isFirstOpen = false;
     Get.offAllNamed(Routes.LOGIN);
   }
 

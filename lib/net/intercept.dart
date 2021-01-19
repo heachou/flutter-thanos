@@ -70,7 +70,7 @@ class AdapterInterceptor extends Interceptor {
   static const String _kNotFound = '未找到查询信息';
 
   static const String _kFailureFormat = '{"code":%d,"message":"%s"}';
-  static const String _kSuccessFormat = '{"code":0,"data":%s,"message":""}';
+  // static const String _kSuccessFormat = '{"code":0,"data":%s,"message":""}';
 
   @override
   Future onResponse(Response response) {

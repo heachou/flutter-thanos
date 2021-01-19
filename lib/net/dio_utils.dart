@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:thanos/utils/log_utils.dart';
 import 'package:thanos/values/values.dart';
+import 'package:thanos/widgets/message.dart';
 import 'base_entity.dart';
 import 'error_handle.dart';
 
@@ -199,6 +201,7 @@ class DioUtils {
       msg = '未知异常';
     }
     Log.e('接口请求异常： code: $code, mag: $msg');
+    Message.show(msg, backgroundColor: AppColors.dangerText);
     if (onError != null) {
       onError(code, msg);
     }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:thanos/entitys/entitys.dart';
-import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/storage.dart';
 
 class Global {
@@ -34,7 +33,7 @@ class Global {
     isFirstOpen =
         !SpUtil.getBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, defValue: true);
     if (isFirstOpen) {
-      SpUtil.putBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, false);
+      SpUtil.putBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, true);
     }
 
     // 读取离线用户信息

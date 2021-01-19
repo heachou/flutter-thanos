@@ -7,6 +7,7 @@ Widget inputTextEdit(
     TextInputType keyboardType = TextInputType.text,
     String hintText,
     bool isPassword = false,
+    FocusNode focusNode,
     double marginTop = 30}) {
   return Container(
     height: duSetHeight(88),
@@ -23,6 +24,7 @@ Widget inputTextEdit(
         contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 9),
         border: InputBorder.none,
       ),
+      focusNode: focusNode,
       style: TextStyle(
           color: AppColors.primaryText,
           fontWeight: FontWeight.w400,

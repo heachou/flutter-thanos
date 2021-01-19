@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thanos/entitys/user.dart';
+import 'package:get/get.dart';
+import 'package:thanos/controllers/login.dart';
 
-class IndexPage extends StatefulWidget {
-  IndexPage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _IndexPageState createState() => _IndexPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
+class _HomePageState extends State<HomePage> {
+  final UserController userController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     // 屏幕适配
@@ -18,9 +21,10 @@ class _IndexPageState extends State<IndexPage> {
       designSize: Size(750, 1334),
       allowFontScaling: true,
     );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('index page'),
+        title: Text('index page ${userController.user.accountId}'),
       ),
       body: Column(
         children: [
@@ -45,14 +49,7 @@ class _IndexPageState extends State<IndexPage> {
     );
   }
 
-  void login() async {
-    UserRequestLogin params = UserRequestLogin(
-      authType: "PHONE_NUMBER_SMS_CODE",
-      handPhone: "15196947186",
-      authCode: 192019,
-      loginChannel: 1,
-    );
-  }
+  void login() async {}
 
   void toSignIn() {}
 

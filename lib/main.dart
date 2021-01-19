@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thanos/controllers/login.dart';
 import 'package:thanos/global.dart';
 import 'package:thanos/net/init.dart';
 import 'package:thanos/routes/app_pages.dart';
@@ -15,11 +16,18 @@ class MyApp extends StatelessWidget {
     Log.init();
     initDio();
   }
+
+  final UserController userController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: '中台系统',
-      initialRoute: AppPages.INITIAL,
+      initialRoute: Global.isFirstOpen
+          ? AppPages.INITIAL
+          : userController.user?.token == null
+              ? AppPages.LOGIN
+              : AppPages.HOME,
       getPages: AppPages.routes,
       routingCallback: (routing) {
         print(routing.current);
