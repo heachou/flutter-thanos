@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
     initDio();
   }
 
-  final UserController userController = Get.find();
+  // 使用Get.put()实例化你的类，使其对当下的所有子路由可用。
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,9 @@ class MyApp extends StatelessWidget {
       title: '中台系统',
       initialRoute: Global.isFirstOpen
           ? AppPages.INITIAL
-          : userController.user?.token == null
-              ? AppPages.LOGIN
-              : AppPages.HOME,
+          : Global.isOfflineLogin
+              ? AppPages.HOME
+              : AppPages.LOGIN,
       getPages: AppPages.routes,
       routingCallback: (routing) {
         print(routing.current);

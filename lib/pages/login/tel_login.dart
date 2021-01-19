@@ -6,7 +6,6 @@ import 'package:thanos/controllers/login.dart';
 import 'package:thanos/entitys/entitys.dart';
 import 'package:thanos/pages/login/widgets/dingdingButton.dart';
 import 'package:thanos/routes/app_pages.dart';
-import 'package:thanos/utils/screen.dart';
 import 'package:thanos/utils/utils.dart';
 import 'package:thanos/values/colors.dart';
 import 'package:thanos/widgets/widgets.dart';
@@ -27,8 +26,7 @@ class _TelLoginState extends State<TelLogin> {
   final FocusNode _nodeText1 = FocusNode();
   final FocusNode _nodeText2 = FocusNode();
 
-  // 使用Get.put()实例化你的类，使其对当下的所有子路由可用。
-  final UserController userController = Get.put(UserController());
+  final UserController userController = Get.find();
 
   // 执行登录
   _handleLogin() async {
@@ -51,6 +49,7 @@ class _TelLoginState extends State<TelLogin> {
     UserApi.login(params, onSuccess: (data) {
       // 在这里存储登录信息
       userController.setUser(data);
+
       // 跳转到首页
       Get.offAllNamed(Routes.HOME);
     });

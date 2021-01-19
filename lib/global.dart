@@ -30,15 +30,15 @@ class Global {
     // 工具初始
     await SpUtil.getInstance();
     // 设备第一次打开
-    isFirstOpen =
-        !SpUtil.getBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, defValue: true);
+    isFirstOpen = !SpUtil.getBool(STORAGE_DEVICE_ALREADY_OPEN_KEY);
+    print(['isFirstOpen', isFirstOpen]);
     if (isFirstOpen) {
       SpUtil.putBool(STORAGE_DEVICE_ALREADY_OPEN_KEY, true);
     }
 
     // 读取离线用户信息
     var profile = SpUtil.getObj(
-        STORAGE_USER_PROFILE_KEY, (v) => UserRequestLogin.fromJson(v));
+        STORAGE_USER_PROFILE_KEY, (v) => UserResponseLogin.fromJson(v));
 
     if (profile != null) {
       isOfflineLogin = true;
